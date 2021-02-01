@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <input type="text" id="user">  
+        <button onClick="getItem()">Get Initial Items</button>
+        <button id="myButton">Press Me</button>
+        <p id="paraObj"></p>
+    </body>
+    
+    <script>
+        async function getItem(userName = "divya") {
+            console.log(userName);
+            const url = "http://192.168.1.129:8000/user/?userName=divya"
+            // const url = "http://192.168.1.129:8000/user/?" + new URLSearchParams({"userName":userName});
+            // console.log(url);
+            const options = {
+                method: "GET",
+                mode: 'cors',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            }
+            response = await fetch(url, options);
+            const data = await res.json();
+            console.log(data);
+            ogstring = JSON.stringify(data.data[0].itemList);
+            document.getElementById("paraObj").innerHTML = ogstring;
+        }
+
+
+        document.getElementById('myButton').onclick=function(){
+            fetch("http://localhost:8000/user/?" + new URLSearchParams({
+                userName:document.getElementById("user").value
+            }), {
+                method:"GET",
+                headers: {'Content-Type': 'application/json'},
+            })
+            .then(data => data.text())
+            .then((text) => {console.log(text)});
+        }
+
+    </script>
+</html>
