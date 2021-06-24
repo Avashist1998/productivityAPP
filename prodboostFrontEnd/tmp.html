@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+    <body>
+        <button onClick="getItem()">
+            Get Initial Items
+        </button>
+        <input id="get" type ="text" placeholder="get" value="">
+        <button onClick="printId()">Button</button>
+        <!-- <input id="item" type="text" placeholder="item" value="">
+        <input id="date" type ="text" placeholder="date" value="">
+        <button onClick="getData()">button</button> -->
+        <!-- <input id="delete" type ="text" placeholder="delete" value="">
+        <button onClick="getDelete()">Button</button> -->
+        <p id="paraObj"></p>
+    </body>
+    <script>
+            async function getId(userName, itemName) {
+            const url = "http://192.168.1.129:8000/list/?" + new URLSearchParams({"userName":userName}) + "&" + new URLSearchParams({"itemName":itemName});
+            const options = {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            }
+            var response = await fetch(url)
+            const data = await response.json();
+            console.log(data);
+            var Inputid = data.data[0].id;
+            console.log(Inputid);
+            return Inputid;
+        };
+        async function printId() {
+            var name = document.getElementById("get").value;
+            str = await getId("divya", name);
+            document.getElementById("paraObj").innerHTML = name + str;
+        }
+        async function getAllItems(userName) {
+            const url = "http://192.168.1.129:8000/user/?" + new URLSearchParams({"userName":userName});
+            console.log(url)
+            const options = {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                }
+            }
+            response = await fetch(url, options);
+            const data = await response.json();
+            return data.data[0].itemNames;
+        }
+        
+        async function getItem(userName="divya"){
+            var array = await getAllItems(userName)
+            document.getElementById("paraObj").innerHTML = array;
+        }
+        async function addItem(userName, itemName, date) {
+            const url = "http://192.168.1.129:8000/list/?" + new URLSearchParams({"userName":userName});
+            const data = {"name": itemName, "d": date};
+            fetch(url, {method: "POST",
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Sucess:', data);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+        
+        // async function getData() {
+        //     var itemName = document.getElementById("item").value;
+        //     var date = document.getElementById("date").value;
+        //     addItem("divya", itemName, date);
+        // }
+        
+        
+    </script>
+
+</html>

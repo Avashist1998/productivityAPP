@@ -1,0 +1,259 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background-image: linear-gradient(120deg, #0051ff 0%, #05f9ff 100%);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+  }
+  header {
+    font-size: 1rem;
+  }
+  
+  header,
+  form {
+    min-height: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .Calendar {
+    margin-top: 20px;
+    margin-left: 140px;
+    width: 550px;
+    height: 500px;
+  }
+  img {
+    box-shadow: 10px 10px 5px grey;
+  }
+  #inputform input,
+  #inputform button {
+    padding: 0.5rem;
+    font-size: 1.3rem;
+    border: none;
+    background: white;
+  }
+  #inputform button {
+    color: #05f9ff;
+    background: #f7fffe;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  #inputform button:hover {
+    background: #05f9ff;
+    color: white;
+  }
+  .todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .todo-list {
+    margin-left: 150px;
+    min-width: 30%;
+    max-width: 50%;
+    list-style: none;
+  }
+  
+  .todo {
+    margin: 0.5em;
+    background: white;
+    font-size: 1.5rem;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 1s ease;
+  }
+  .filter-todo {
+    padding: 1rem;
+  }
+  .todo li {
+    flex: 1;
+  }
+  
+  .trash-btn,
+  .complete-btn {
+    background: #05f9ff;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .complete-btn {
+    background: #00d2ff;
+  }
+  .todo-item {
+    padding: 0em 0.5em;
+  }
+  
+  .fa-trash,
+  .fa-check {
+    pointer-events: none;
+  }
+  
+  .fall {
+    transform: translateY(10rem) rotateZ(20deg);
+    opacity: 0;
+  }
+  
+  .completed {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+  
+  /*CUSTOM SELECTOR */
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    outline: 0;
+    box-shadow: none;
+    border: 0 !important;
+    background-image: none;
+  }
+  
+  /* Custom Select */
+  .select {
+    margin: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  select {
+    color: #47f3ff;
+    font-family: "Poppins", sans-serif;
+    cursor: pointer;
+    width: 12rem;
+  }
+  /* Transition */
+  /*
+  .select:hover::after {
+    transform: scale(1.5);
+  }
+  */
+
+#menuToggle
+{
+  display: block;
+  position: relative;
+  top: 20px;
+  left: 10px;
+  
+  z-index: 1;
+  
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle a
+{
+  text-decoration: none;
+  color: #4994f7;
+  
+  transition: color 0.3s ease;
+}
+
+#menuToggle a:hover
+{
+  color: tomato;
+}
+
+
+#menuToggle input
+{
+  display: block;
+  width: 40px;
+  height: 32px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  
+  cursor: pointer;
+  
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width: 33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  
+  background: white;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+#menu
+{
+  position: absolute;
+  width: 300px;
+  margin: -100px 0 0 -50px;
+  padding: 50px;
+  padding-top: 125px;
+  
+  background: white;
+  list-style-type: none;
+  -webkit-font-smoothing: antialiased;
+  
+  transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu ul
+{
+  padding: 10px 0;
+  font-size: 22px;
+}
+
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
